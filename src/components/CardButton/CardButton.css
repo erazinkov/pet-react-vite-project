@@ -1,0 +1,16 @@
+.card-button {
+    border-radius: 0.25rem;
+    padding: 1.5rem;
+    background: darkgray;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-align: start;
+    display: block;
+    width: 100%;
+    /* font-family: var(--roboto); */
+}
+
+.card-button:hover {
+    background: gray;
+}

@@ -1,0 +1,17 @@
+.input {
+    border: none;
+    background: none;
+    border-bottom: 1px solid gray;
+    font-family: var(--roboto);
+    font-size: 1.25rem;
+    width: 100%;
+}
+
+.input-title {
+    font-size: 2rem;
+   
+}
+.invalid {
+    border: 1px solid red;
+    background: lightpink;
+}
