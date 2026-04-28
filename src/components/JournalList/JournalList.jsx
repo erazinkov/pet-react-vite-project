@@ -1,7 +1,11 @@
 import './JournalList.css';
 import JournalItem from '../JournalItem/JournalItem';
 import CardButton from '../CardButton/CardButton';
+import { useContext } from 'react';
+import { UserContext } from '../../context/user.context';
+
 function JournalList({items}) {
+	const {userId} = useContext(UserContext);
 
 	if (items.length === 0) {
 		return <p>Записей нет</p>;
@@ -14,12 +18,12 @@ function JournalList({items}) {
 		}
 	};
 	return <>
-		{items.sort(sortItems).map(element => 
+		{items.filter(element => element.userId === userId).sort(sortItems).map(element => 
 			<CardButton key={element.id}>
 				<JournalItem
 					title={element.title}
 					date={element.date}
-					text={element.text}
+					text={element.post}
 				></JournalItem>
 			</CardButton>
 		)}
