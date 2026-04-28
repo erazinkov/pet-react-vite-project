@@ -7,7 +7,7 @@ import Input from '../Input/Input';
 import { UserContext } from '../../context/user.context';
 
 
-function JournalForm({onSubmit}) {
+function JournalForm({onSubmit, data, onDelete}) {
 	
 	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
 	const {isValid, isFormReadyToSubmit, values} = formState;
@@ -15,6 +15,14 @@ function JournalForm({onSubmit}) {
 	const dateRef = useRef();
 	const postRef = useRef();
 	const {userId} = useContext(UserContext);
+
+	useEffect(() => {
+		if (!data) {
+			dispatchForm({type: 'RESET'});
+			dispatchForm({type: 'SET_VALUE', payload: {userId}});
+		}
+		dispatchForm({type: 'SET_VALUE', payload: {...data}});
+	}, [data]);
 
 	const focusInvalid = (isValid) => {
 		switch (true) {
@@ -45,37 +53,44 @@ function JournalForm({onSubmit}) {
 		if(isFormReadyToSubmit) {
 			onSubmit(values);
 			dispatchForm({type: 'RESET'});
+			dispatchForm({type: 'SET_VALUE', payload: {userId}});
 		}
-	}, [isFormReadyToSubmit, values, onSubmit]);
+	}, [isFormReadyToSubmit, values, onSubmit, userId]);
 
 	const addJournalItem = (event) => {
 		event.preventDefault();
 		dispatchForm({type: 'SUBMIT'});
+	};
+	const deleteJournalItem = () => {
+		onDelete(data.id);
+		dispatchForm({type: 'RESET'});
+		dispatchForm({type: 'SET_VALUE', payload: {userId}});
 	};
 
 	const onChange = (event) => {
 		dispatchForm({type: 'SET_VALUE', payload: {
 			[event.target.name]: event.target.value
 		}});
+
 	};
 	useEffect(() => {
-		dispatchForm({type: 'SET_VALUE', payload: {
-			userId
-		}});
+		dispatchForm({type: 'SET_VALUE', payload: {userId}});
 	}, [userId]);
 
 	return (
 		<form className={styles['journal-form']} onSubmit={addJournalItem}>
-			{userId}
-			<div>
+			<div className={styles['form-row']}>
 				<Input type="text" name="title" ref={titleRef} onChange={onChange} value={values.title} appearance="title" isValid={isValid.title}/>
+				{data?.id && <button className={styles['delete']} type="button" onClick={deleteJournalItem}>
+					<img  src="/archive.svg" alt="Удалить" />
+				</button>}
 			</div>
 			<div className={styles['form-row']}>
 				<label htmlFor="date" className={styles['form-label']}>
 					<img src="/calendar.svg" alt="Дата"/>
 					<span>Дата</span>
 				</label>
-				<Input id="date" type="date" name="date" ref={dateRef} onChange={onChange} value={values.date} isValid={isValid.date}/>
+				<Input id="date" type="date" name="date" ref={dateRef} onChange={onChange} value={values.date ? new Date(values.date).toISOString().slice(0, 10) : ''} isValid={isValid.date}/>
 			</div>
 			<div className={styles['form-row']}>
 				<label htmlFor="tag" className={styles['form-label']}>

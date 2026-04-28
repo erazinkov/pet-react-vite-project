@@ -1,9 +1,9 @@
 import './CardButton.css';
 
-function CardButton({children, className}) {
+function CardButton({children, className, ...props}) {
 	const rc = 'card-button' + (className ? ' ' + className : '');
 	return (
-		<button className={rc}>{children}</button>
+		<button {...props} className={rc}>{children}</button>
 	);
 }
 
