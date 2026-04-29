@@ -4,7 +4,7 @@ import { useContext, useEffect, useReducer, useRef } from 'react';
 import cn from 'classnames';
 import { formReducer, INITIAL_STATE } from './NoteForm.state';
 import Input from '../Input/Input';
-import { UserContext } from '../../context/user.context';
+import { CategoryContext } from '../../context/category.context';
 
 
 function NoteForm({onSubmit, data, onDelete}) {
@@ -14,12 +14,12 @@ function NoteForm({onSubmit, data, onDelete}) {
 	const titleRef = useRef();
 	const dateRef = useRef();
 	const postRef = useRef();
-	const {userId} = useContext(UserContext);
+	const {categoryId} = useContext(CategoryContext);
 
 	useEffect(() => {
 		if (!data) {
 			dispatchForm({type: 'RESET'});
-			dispatchForm({type: 'SET_VALUE', payload: {userId}});
+			dispatchForm({type: 'SET_VALUE', payload: {categoryId}});
 		}
 		dispatchForm({type: 'SET_VALUE', payload: {...data}});
 	}, [data]);
@@ -53,9 +53,9 @@ function NoteForm({onSubmit, data, onDelete}) {
 		if(isFormReadyToSubmit) {
 			onSubmit(values);
 			dispatchForm({type: 'RESET'});
-			dispatchForm({type: 'SET_VALUE', payload: {userId}});
+			dispatchForm({type: 'SET_VALUE', payload: {categoryId}});
 		}
-	}, [isFormReadyToSubmit, values, onSubmit, userId]);
+	}, [isFormReadyToSubmit, values, onSubmit, categoryId]);
 
 	const addNoteItem = (event) => {
 		event.preventDefault();
@@ -64,7 +64,7 @@ function NoteForm({onSubmit, data, onDelete}) {
 	const deleteNoteItem = () => {
 		onDelete(data.id);
 		dispatchForm({type: 'RESET'});
-		dispatchForm({type: 'SET_VALUE', payload: {userId}});
+		dispatchForm({type: 'SET_VALUE', payload: {categoryId}});
 	};
 
 	const onChange = (event) => {
@@ -74,8 +74,8 @@ function NoteForm({onSubmit, data, onDelete}) {
 
 	};
 	useEffect(() => {
-		dispatchForm({type: 'SET_VALUE', payload: {userId}});
-	}, [userId]);
+		dispatchForm({type: 'SET_VALUE', payload: {categoryId}});
+	}, [categoryId]);
 
 	return (
 		<form className={styles['note-form']} onSubmit={addNoteItem}>

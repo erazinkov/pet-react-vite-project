@@ -4,7 +4,7 @@ import CentralPanel from './layout/CentralPanel/CentralPanel';
 import Header from './components/Header/Header';
 import NoteList from './components/NoteList/NoteList';
 import { useLocalStorage } from './hooks/use-localstorage.hook';
-import { UserContextProvider } from './context/user.context';
+import { CategoryContextProvider } from './context/category.context';
 import { useState } from 'react';
 import AddNoteButton from './components/AddNoteButton/AddNoteButton';
 import NoteForm from './components/NoteForm/NoteForm';
@@ -44,7 +44,7 @@ function App() {
 	};
 
 	return (
-		<UserContextProvider>
+		<CategoryContextProvider>
 			<div className='app'>
 				<SidePanel>
 					<Header></Header>
@@ -56,7 +56,7 @@ function App() {
 					<NoteForm onSubmit={addItem} onDelete={deleteItem} data={selectedItem}></NoteForm>
 				</CentralPanel>
 			</div>
-		</UserContextProvider>
+		</CategoryContextProvider>
 	);
 }
 

@@ -1,5 +1,5 @@
 import styles from './Header.module.css';
-import SelectUser from '../SelectUser/SelectUser';
+import SelectUser from '../SelectCategory/SelectCategory';
 
 function Header() {
 	return (

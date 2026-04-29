@@ -1,11 +1,11 @@
 import './NoteList.css';
 import NoteItem from '../NoteItem/NoteItem';
 import { useContext, useMemo } from 'react';
-import { UserContext } from '../../context/user.context';
+import { CategoryContext } from '../../context/category.context';
 import NoteButton from '../NoteButton/NoteButton';
 
 function NoteList({items, setItem}) {
-	const {userId} = useContext(UserContext);
+	const {categoryId} = useContext(CategoryContext);
 	const sortItems = (a, b) => {
 		if (a.date < b.date) {
 			return 1;
@@ -14,8 +14,8 @@ function NoteList({items, setItem}) {
 		}
 	};
 	const filteredItems = useMemo(() => {
-		return items.filter(element => element.userId === userId).sort(sortItems);
-	}, [items, userId]) ;
+		return items.filter(element => element.categoryId === categoryId).sort(sortItems);
+	}, [items, categoryId]) ;
 	
 	if (items.length === 0) {
 		return <p>Записей нет</p>;
