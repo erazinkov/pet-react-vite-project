@@ -4,7 +4,13 @@ import SelectUser from '../SelectUser/SelectUser';
 function Header() {
 	return (
 		<>
-			<img className={styles.logo} src={'/journal.svg'} alt="Логотип журнала" />
+			<div className={styles['logo']}>
+				<span>pet</span>
+				<img className={styles['logo-item']} src={'/src/assets/react.svg'} alt="Логотип React" />
+				<span>+</span>
+				<img className={styles['logo-item']} src={'/src/assets/vite.svg'} alt="Логотип Vite" />
+				<span>project</span>
+			</div>
 			<SelectUser></SelectUser>
 		</>
 	);

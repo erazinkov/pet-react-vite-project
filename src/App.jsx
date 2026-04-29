@@ -1,6 +1,6 @@
 import './App.css';
-import LeftPanel from './layout/LeftPanel/LeftPanel';
-import Body from './layout/Body/Body';
+import SidePanel from './layout/SidePanel/SidePanel';
+import CentralPanel from './layout/CentralPanel/CentralPanel';
 import JournalAddButton from './components/JournalAddButton/JournalAddButton';
 import Header from './components/Header/Header';
 import JournalList from './components/JournalList/JournalList';
@@ -46,15 +46,15 @@ function App() {
 	return (
 		<UserContextProvider>
 			<div className='app'>
-				<LeftPanel>
+				<SidePanel>
 					<Header></Header>
 					<JournalAddButton clearForm={() => setSelectedItem(null)}></JournalAddButton>
 					<JournalList items={mapItems(items)} setItem={setSelectedItem}>
 					</JournalList>
-				</LeftPanel>
-				<Body>
+				</SidePanel>
+				<CentralPanel>
 					<JournalForm onSubmit={addItem} onDelete={deleteItem} data={selectedItem}></JournalForm>
-				</Body>
+				</CentralPanel>
 			</div>
 		</UserContextProvider>
 	);

@@ -1,11 +1,11 @@
-import CardButton from '../CardButton/CardButton';
+import NoteButton from '../NoteButton/NoteButton';
 import './JournalAddButton.css';
 
 function JournalAddButton({clearForm}) {
 	return (
-		<CardButton className='journal-add' onClick={clearForm}>
-            Новая запись
-		</CardButton>
+		<NoteButton className='journal-add' onClick={clearForm}>
+            Добавить заметку
+		</NoteButton>
 	);
 }
 

@@ -1,4 +1,7 @@
 .journal-add {
     padding: 0.75rem;
     text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: var(--roboto);
 }
