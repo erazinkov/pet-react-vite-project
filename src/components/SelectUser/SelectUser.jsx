@@ -10,8 +10,8 @@ function SelectUser() {
 	return (
 		<>
 			<select className={styles['select-user']} name="user" id="user" value={userId} onChange={onChange}>
-				<option value="1">Егор</option>
-				<option value="2">Вася</option>
+				<option value="1">User1</option>
+				<option value="2">User2</option>
 			</select>
 		</>
 	);

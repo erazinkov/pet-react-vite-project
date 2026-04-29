@@ -1,10 +1,10 @@
-import './JournalList.css';
-import JournalItem from '../JournalItem/JournalItem';
+import './NoteList.css';
+import NoteItem from '../NoteItem/NoteItem';
 import { useContext, useMemo } from 'react';
 import { UserContext } from '../../context/user.context';
 import NoteButton from '../NoteButton/NoteButton';
 
-function JournalList({items, setItem}) {
+function NoteList({items, setItem}) {
 	const {userId} = useContext(UserContext);
 	const sortItems = (a, b) => {
 		if (a.date < b.date) {
@@ -24,14 +24,14 @@ function JournalList({items, setItem}) {
 	return <>
 		{filteredItems.map(element => 
 			<NoteButton key={element.id} onClick={() => setItem(element)}>
-				<JournalItem
+				<NoteItem
 					title={element.title}
 					date={element.date}
 					text={element.post}
-				></JournalItem>
+				></NoteItem>
 			</NoteButton>
 		)}
 	</>;
 }
 
-export default JournalList;
+export default NoteList;

@@ -1,13 +1,13 @@
-import styles from './JournalForm.module.css';
+import styles from './NoteForm.module.css';
 import Button from '../Button/Button';
 import { useContext, useEffect, useReducer, useRef } from 'react';
 import cn from 'classnames';
-import { formReducer, INITIAL_STATE } from './JournalForm.state';
+import { formReducer, INITIAL_STATE } from './NoteForm.state';
 import Input from '../Input/Input';
 import { UserContext } from '../../context/user.context';
 
 
-function JournalForm({onSubmit, data, onDelete}) {
+function NoteForm({onSubmit, data, onDelete}) {
 	
 	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
 	const {isValid, isFormReadyToSubmit, values} = formState;
@@ -57,11 +57,11 @@ function JournalForm({onSubmit, data, onDelete}) {
 		}
 	}, [isFormReadyToSubmit, values, onSubmit, userId]);
 
-	const addJournalItem = (event) => {
+	const addNoteItem = (event) => {
 		event.preventDefault();
 		dispatchForm({type: 'SUBMIT'});
 	};
-	const deleteJournalItem = () => {
+	const deleteNoteItem = () => {
 		onDelete(data.id);
 		dispatchForm({type: 'RESET'});
 		dispatchForm({type: 'SET_VALUE', payload: {userId}});
@@ -78,24 +78,24 @@ function JournalForm({onSubmit, data, onDelete}) {
 	}, [userId]);
 
 	return (
-		<form className={styles['journal-form']} onSubmit={addJournalItem}>
-			<div className={styles['form-row']}>
+		<form className={styles['note-form']} onSubmit={addNoteItem}>
+			<div className={styles['note-form_row']}>
 				<Input type="text" name="title" ref={titleRef} onChange={onChange} value={values.title} appearance="title" isValid={isValid.title}/>
-				{data?.id && <button className={styles['delete']} type="button" onClick={deleteJournalItem}>
-					<img  src="/archive.svg" alt="Удалить" />
+				{data?.id && <button className={styles['delete']} type="button" onClick={deleteNoteItem}>
+					<img  src="/delete.svg" alt="Удалить" />
 				</button>}
 			</div>
-			<div className={styles['form-row']}>
-				<label htmlFor="date" className={styles['form-label']}>
+			<div className={styles['note-form_row']}>
+				<label htmlFor="date" className={styles['note-form_label']}>
 					<img src="/calendar.svg" alt="Дата"/>
 					<span>Дата</span>
 				</label>
 				<Input id="date" type="date" name="date" ref={dateRef} onChange={onChange} value={values.date ? new Date(values.date).toISOString().slice(0, 10) : ''} isValid={isValid.date}/>
 			</div>
-			<div className={styles['form-row']}>
-				<label htmlFor="tag" className={styles['form-label']}>
-					<img src="/folder.svg" alt="Метки"/>
-					<span>Метки</span>
+			<div className={styles['note-form_row']}>
+				<label htmlFor="tag" className={styles['note-form_label']}>
+					<img src="/tag.svg" alt="Метки"/>
+					<span>Тэги</span>
 				</label>
 				<Input id="tag" type="text" name="tag" onChange={onChange} value={values.tag} />
 			</div>
@@ -113,4 +113,4 @@ function JournalForm({onSubmit, data, onDelete}) {
 	);
 }
 
-export default JournalForm;
+export default NoteForm;

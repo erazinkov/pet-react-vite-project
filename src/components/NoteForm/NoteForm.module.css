@@ -1,4 +1,4 @@
-.journal-form {
+.note-form {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -11,24 +11,24 @@
     font-family: var(--roboto);
     width: 100%;
 }
-.form-row {
+.note-form_row {
     display: flex;
     align-items: center;
-   
 }
-.form-label {
+.note-form_label {
     display: flex;
     align-items: center;
     gap: 1.5rem;
     min-width: 7.5rem;
 }
 .input {
-    border: none;
+    border: 1px solid gray;
+    border-radius: 1rem;
+    padding: 0.5rem;
     background: none;
     border-bottom: 1px solid gray;
     font-family: var(--roboto);
     font-size: 1.25rem;
-    width: 100%;
 }
 .invalid {
     border: 1px solid red;

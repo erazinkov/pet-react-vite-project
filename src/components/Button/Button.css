@@ -4,12 +4,11 @@
     padding: 0.5rem;
     background: darkgray;
     color: white;
-    transition: background 0.5s;
     font-size: 1rem;
     cursor: pointer;
     font-family: var(--roboto);
 }
 
-.note-button:hover {
+.button:hover {
     background: gray;
 }

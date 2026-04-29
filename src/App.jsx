@@ -1,21 +1,21 @@
 import './App.css';
 import SidePanel from './layout/SidePanel/SidePanel';
 import CentralPanel from './layout/CentralPanel/CentralPanel';
-import JournalAddButton from './components/JournalAddButton/JournalAddButton';
 import Header from './components/Header/Header';
-import JournalList from './components/JournalList/JournalList';
-import JournalForm from './components/JournalForm/JournalForm';
+import NoteList from './components/NoteList/NoteList';
 import { useLocalStorage } from './hooks/use-localstorage.hook';
 import { UserContextProvider } from './context/user.context';
 import { useState } from 'react';
+import AddNoteButton from './components/AddNoteButton/AddNoteButton';
+import NoteForm from './components/NoteForm/NoteForm';
 
 function mapItems(items) {
 	if (!items) {
 		return [];
 	}
-	return items.map(ii => ({
-		...ii,
-		date: new Date(ii.date)
+	return items.map(element => ({
+		...element,
+		date: new Date(element.date)
 	}));
 }
 
@@ -27,7 +27,7 @@ function App() {
 			setItems([...mapItems(items), {
 				...item,
 				date: new Date(item.date),
-				id: items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1
+				id: items.length > 0 ? Math.max(...items.map(element => element.id)) + 1 : 1
 			}]);
 		} else {
 			setItems([...mapItems(items).map(element => {
@@ -48,12 +48,12 @@ function App() {
 			<div className='app'>
 				<SidePanel>
 					<Header></Header>
-					<JournalAddButton clearForm={() => setSelectedItem(null)}></JournalAddButton>
-					<JournalList items={mapItems(items)} setItem={setSelectedItem}>
-					</JournalList>
+					<AddNoteButton clearForm={() => setSelectedItem(null)}></AddNoteButton>
+					<NoteList items={mapItems(items)} setItem={setSelectedItem}>
+					</NoteList>
 				</SidePanel>
 				<CentralPanel>
-					<JournalForm onSubmit={addItem} onDelete={deleteItem} data={selectedItem}></JournalForm>
+					<NoteForm onSubmit={addItem} onDelete={deleteItem} data={selectedItem}></NoteForm>
 				</CentralPanel>
 			</div>
 		</UserContextProvider>
