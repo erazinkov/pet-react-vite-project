@@ -2,15 +2,13 @@
     border-radius: 0.25rem;
     border: none;
     padding: 0.5rem;
-    transition: background 0.5s;
+    background: darkgray;
+    color: white;
     font-size: 1rem;
     cursor: pointer;
+    font-family: var(--roboto);
 }
 
 .button:hover {
-    background: darkblue;
-}
-
-.hero {
-    background: blue;
+    background: gray;
 }

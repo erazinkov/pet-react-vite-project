@@ -1,4 +1,4 @@
-.card-button {
+.note-button {
     border-radius: 0.25rem;
     padding: 1.5rem;
     background: darkgray;
@@ -7,10 +7,9 @@
     cursor: pointer;
     text-align: start;
     display: block;
-    width: 100%;
-    /* font-family: var(--roboto); */
+    width: 20rem;
 }
 
-.card-button:hover {
+.note-button:hover {
     background: gray;
 }

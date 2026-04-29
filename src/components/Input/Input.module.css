@@ -1,7 +1,8 @@
 .input {
-    border: none;
     background: none;
-    border-bottom: 1px solid gray;
+    border: 1px solid gray;
+    border-radius: 1rem;
+    padding: 0.5rem;
     font-family: var(--roboto);
     font-size: 1.25rem;
     width: 100%;
